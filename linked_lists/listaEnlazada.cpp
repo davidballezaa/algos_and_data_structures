@@ -44,6 +44,19 @@ class List {
 
 };
 
+void List::update(int value, int index){
+	Node *aux = this->first;
+	int i = 0;
+	while(aux != NULL){
+		if(i == index){
+			aux->value = value;
+			break;
+		}
+		aux = aux->next;
+		i++;
+	}
+}
+
 Node* List::find (int value, int *index)
 {	//	Comenzamos en el primer nodo (first)
 	//	aux servira como iterador 
@@ -68,7 +81,6 @@ Node* List::find (int value, int *index)
 	return NULL;
 
 }
-
 
 // 	Elimina el primer elemento de la lista
 void List::deleteFirst () {	
@@ -122,7 +134,6 @@ void List::insertFirst(int newValue){
 	this->first = node;			//	El nuevo primero es el nuevo nodo
 	this->size += 1;				//	Aumentamos tamaño de la lista de elementos
 }
-
 
 // Insertar nuevo nodo al final 
 void List::insertLast(int newValue)
@@ -209,6 +220,8 @@ int main(int argc, char* argv[]) {
 	list.deleteLast(); 	list.showList();
 
 	list.deleteAtIndex(1); 	list.showList();
+
+	list.update(7, 1); list.showList();
 
 	int index;
 	Node *a = list.find(2, &index);
