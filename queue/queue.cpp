@@ -105,62 +105,72 @@ public:
         delete[] this->arr;
     }
 
-    bool isEmpty() {
-        return this->size == 0;
-    }
+    bool isEmpty();
+    bool isFull();
+    int getSize();
+    void show();
 
-    bool isFull() {
-        return this->size == this->maxSize;
-    }
+    void enqueue(int valor);
+    int dequeue();
+    void getTop();
 
-    int getSize() {
-        return this->size;
-    }
-
-    void show() {
-        if (isEmpty()) {
-            cout << "Queue is empty." << endl;
-            return;
-        }
-
-        for (int i = this->first, count = 0; count < this->size; i = (i + 1) % this->maxSize, count++) {
-            int index = i % this->maxSize;
-            cout << "Element [" << count << "]: " << this->arr[index] << '\n';
-        }
-    }
-
-    void enqueue(int value) {
-        if (isFull()) {
-            cout << "Queue is full of items." << endl;
-            return;
-        }
-
-        int index = (this->first + this->size) % this->maxSize;
-        this->arr[index] = value;
-        this->size += 1;
-    }
-
-    int dequeue() {
-        if (isEmpty()) {
-            cout << "Queue is empty." << endl;
-            return -1;
-        }
-
-        int dequeuedItem = this->arr[this->first];
-        this->first = (this->first + 1) % this->maxSize;
-        this->size--;
-
-        return dequeuedItem;
-    }
-
-    void getTop() {
-        if (isEmpty()) {
-            cout << "Queue is empty." << endl;
-        } else {
-            cout << "Next element is: " << this->arr[this->first] << endl;
-        }
-    }
 };
+
+bool QueueArray::isEmpty() {
+    return this->size == 0;
+}
+
+bool QueueArray::isFull() {
+    return this->size == this->maxSize;
+}
+
+int QueueArray::getSize() {
+    return this->size;
+}
+
+void QueueArray::show() {
+    if (isEmpty()) {
+        cout << "Queue is empty." << endl;
+        return;
+    }
+
+    for (int i = this->first, count = 0; count < this->size; i = (i + 1) % this->maxSize, count++) {
+        int index = i % this->maxSize;
+        cout << "Element [" << count << "]: " << this->arr[index] << '\n';
+    }
+}
+
+void QueueArray::enqueue(int value) {
+    if (isFull()) {
+        cout << "Queue is full of items." << endl;
+        return;
+    }
+
+    int index = (this->first + this->size) % this->maxSize;
+    this->arr[index] = value;
+    this->size += 1;
+}
+
+int QueueArray::dequeue() {
+    if (isEmpty()) {
+        cout << "Queue is empty." << endl;
+        return -1;
+    }
+
+    int dequeuedItem = this->arr[this->first];
+    this->first = (this->first + 1) % this->maxSize;
+    this->size--;
+
+    return dequeuedItem;
+}
+
+void QueueArray::getTop() {
+    if (isEmpty()) {
+        cout << "Queue is empty." << endl;
+    } else {
+        cout << "Next element is: " << this->arr[this->first] << endl;
+    }
+}
 
 int main() {
     cout << "Array implementation: \n";
